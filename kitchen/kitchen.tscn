@@ -1,3 +1,8 @@
 [gd_scene format=3 uid="uid://b18oqpqkakbqw"]
 
 [node name="kitchen" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
