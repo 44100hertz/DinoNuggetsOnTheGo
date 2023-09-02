@@ -3,8 +3,35 @@
 [ext_resource type="PackedScene" uid="uid://b18oqpqkakbqw" path="res://kitchen/kitchen.tscn" id="1_k8tih"]
 [ext_resource type="PackedScene" uid="uid://8l6l03cpghit" path="res://street/street.tscn" id="2_sgtmf"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="CanvasLayer"]
 
-[node name="kitchen" parent="." instance=ExtResource("1_k8tih")]
+[node name="Splitscreen" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="street" parent="." instance=ExtResource("2_sgtmf")]
+[node name="KitchenViewport" type="SubViewportContainer" parent="Splitscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Splitscreen/KitchenViewport"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="kitchen" parent="Splitscreen/KitchenViewport/SubViewport" instance=ExtResource("1_k8tih")]
+
+[node name="StreetViewport" type="SubViewportContainer" parent="Splitscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Splitscreen/StreetViewport"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="street" parent="Splitscreen/StreetViewport/SubViewport" instance=ExtResource("2_sgtmf")]
