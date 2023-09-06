@@ -1,4 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://8l6l03cpghit"]
+[gd_scene load_steps=6 format=3 uid="uid://8l6l03cpghit"]
+
+[ext_resource type="Script" path="res://street/street.gd" id="1_0fauy"]
+[ext_resource type="Texture2D" uid="uid://by884od6x58oc" path="res://street/steering-wheel.png" id="1_f6rj6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f7alk"]
 sky_top_color = Color(0.203922, 0.184314, 0.54902, 1)
@@ -13,9 +16,41 @@ background_mode = 2
 sky = SubResource("Sky_rutuj")
 
 [node name="street" type="Node3D"]
+script = ExtResource("1_0fauy")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yplni")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Wheel" type="TextureRect" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.507
+anchor_top = 0.346
+anchor_right = 0.507
+anchor_bottom = 0.346
+offset_left = -490.064
+offset_top = -0.20801
+offset_right = 489.936
+offset_bottom = 979.792
+grow_horizontal = 2
+pivot_offset = Vector2(490, 490)
+texture = ExtResource("1_f6rj6")
+stretch_mode = 3
+
+[node name="Center" type="Node2D" parent="UI/Control/Wheel"]
+position = Vector2(490, 490)
+
+[connection signal="gui_input" from="UI/Control/Wheel" to="." method="_on_wheel_gui_input"]
